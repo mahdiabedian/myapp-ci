@@ -47,3 +47,13 @@ jobs:
       - name: Run tests
         run: |
           pytest -q
+      
+      - name: Create source zip
+        run: |
+          zip -r source.zip . -x ".git/*" -x ".github/*" -x "__pycache__/*" -x ".pytest_cache/*" -x ".venv/*"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-zip
+          path: source.zip
